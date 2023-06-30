@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.add-player {
+  min-width: 260px;
+}
+
+.players {
+  display: flex;
+  gap: 10px;
+}

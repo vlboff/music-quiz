@@ -1,18 +1,18 @@
-import './AddPlayerForm.scss'
+import './AddSthForm.scss'
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import { useState } from "react";
 
 interface IAppPlayerForm {
-  addPlayer: (name:string) => void
+  addSth: (name:string) => void
 }
 
-export default function AddPlayerForm({addPlayer}: IAppPlayerForm) {
+export default function AddPlayerForm({addSth}: IAppPlayerForm) {
   const [name, setName] = useState('');
 
   const handleSubmit = () => {
     if (name.trim() !== '') {
-      addPlayer(name);
+      addSth(name);
       setName('');
     }
   }

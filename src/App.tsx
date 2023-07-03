@@ -8,7 +8,7 @@ export interface IPlayer {
 }
 
 function App() {
-  const [players, setPlayers] = useState<IPlayer[]>([]);
+  const [players, setPlayers] = useState<{ [key: string]: IPlayer }>({});
 
   return (
     <>

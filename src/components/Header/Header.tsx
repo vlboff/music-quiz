@@ -9,7 +9,7 @@ interface IHeader {
   setPlayers: React.Dispatch<React.SetStateAction<{ [key: string]: IPlayer }>>;
 }
 
-export default function Header({players, setPlayers}: IHeader) {
+export default function Header({ players, setPlayers }: IHeader) {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const toggleFormVisibility = () => {
@@ -21,7 +21,7 @@ export default function Header({players, setPlayers}: IHeader) {
     setPlayers((players) => ({ ...players, ...newPlayer } as { [key: string]: IPlayer }));
   }
 
-  const  deletePlayer = (name: string) => {
+  const deletePlayer = (name: string) => {
     setPlayers(players => {
       const currentPlayers = { ...players };
       delete currentPlayers[name];
@@ -30,10 +30,10 @@ export default function Header({players, setPlayers}: IHeader) {
   }
   return (
     <header>
-      <AddSth onClick={toggleFormVisibility} addWhat='player' isFormVisible={isFormVisible} addSth={addPlayer}/>
+      <AddSth onClick={toggleFormVisibility} addWhat='player' isFormVisible={isFormVisible} addSth={addPlayer} />
 
       <div className="players">
-        {Object.values(players).map(item => <PlayerInfo key={item.name} name={item.name} points={item.points} deletePlayer={deletePlayer}/>)}
+        {Object.values(players).map(item => <PlayerInfo key={item.name} name={item.name} points={item.points} deletePlayer={deletePlayer} />)}
       </div>
     </header>
   )

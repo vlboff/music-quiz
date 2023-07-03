@@ -10,7 +10,7 @@ interface IQuizRow {
   deleteSection: (name: string) => void;
 }
 
-export default function QuizRow({name, deleteSection}: IQuizRow) {
+export default function QuizRow({ name, deleteSection }: IQuizRow) {
   return (
     <div className="quiz-row">
       <div className="quiz-row__head">

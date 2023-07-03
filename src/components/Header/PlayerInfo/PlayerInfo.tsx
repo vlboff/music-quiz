@@ -7,11 +7,11 @@ interface IPlayerInfo extends IPlayer {
   deletePlayer: (name: string) => void;
 }
 
-export default function PlayerInfo({name, points, deletePlayer}: IPlayerInfo) {
+export default function PlayerInfo({ name, points, deletePlayer }: IPlayerInfo) {
   return (
     <div className="player">
       <IconButton aria-label="delete" size="small" onClick={() => deletePlayer(name)}>
-        <CancelIcon color="error"/>
+        <CancelIcon color="error" />
       </IconButton>
       <div>{name}: {points}</div>
     </div>

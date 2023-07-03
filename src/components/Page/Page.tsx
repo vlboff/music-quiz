@@ -20,7 +20,7 @@ export default function Page() {
     setSections((prevSections) => ({ ...prevSections, ...newSection }));
   };
 
-  const  deleteSection = (name: string) => {
+  const deleteSection = (name: string) => {
     setSections(sections => {
       const currentSections = { ...sections };
       delete currentSections[name];
@@ -30,8 +30,8 @@ export default function Page() {
 
   return (
     <main>
-      {Object.values(sections).map(item => <QuizRow name={item.name} key={item.name} deleteSection={deleteSection}/>)}
-      <AddSth onClick={toggleFormVisibility} addWhat='section' isFormVisible={isFormVisible} addSth={addSection}/>
+      {Object.values(sections).map(item => <QuizRow name={item.name} key={item.name} deleteSection={deleteSection} />)}
+      <AddSth onClick={toggleFormVisibility} addWhat='section' isFormVisible={isFormVisible} addSth={addSection} />
     </main>
   )
 }

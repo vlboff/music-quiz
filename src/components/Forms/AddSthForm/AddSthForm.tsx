@@ -4,10 +4,10 @@ import Input from "@mui/material/Input";
 import { useState } from "react";
 
 interface IAppPlayerForm {
-  addSth: (name:string) => void
+  addSth: (name: string) => void
 }
 
-export default function AddPlayerForm({addSth}: IAppPlayerForm) {
+export default function AddPlayerForm({ addSth }: IAppPlayerForm) {
   const [name, setName] = useState('');
 
   const handleSubmit = () => {
@@ -18,8 +18,8 @@ export default function AddPlayerForm({addSth}: IAppPlayerForm) {
   }
   return (
     <div className="player-form">
-        <Input placeholder="Name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        <Button variant="contained" onClick={handleSubmit}>Add</Button>
+      <Input placeholder="Name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      <Button variant="contained" onClick={handleSubmit}>Add</Button>
     </div>
   )
 }

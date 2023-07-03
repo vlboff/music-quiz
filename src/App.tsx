@@ -12,8 +12,8 @@ function App() {
 
   return (
     <>
-    <Header players={players} setPlayers={setPlayers}/>
-    <Page />
+      <Header players={players} setPlayers={setPlayers} />
+      <Page />
     </>
   )
 }

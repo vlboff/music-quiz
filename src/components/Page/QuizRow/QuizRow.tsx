@@ -1,19 +1,24 @@
 import './QuizRow.scss'
 import Button from '@mui/material/Button'
-import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import QuizBlock from './QuizBlock/QuizBlock';
 
 interface IQuizRow {
   name: string;
   deleteSection: (name: string) => void;
+  isBlockSelected: { name: string, points: number } | null;
+  handleBlockClick: (name: string, points: number) => void;
 }
 
-export default function QuizRow({ name, deleteSection }: IQuizRow) {
+
+const QUIZ_BLOCK_ARRAY: number[] = [100, 200, 300, 400, 500];
+
+export default function QuizRow({ name, deleteSection, isBlockSelected, handleBlockClick }: IQuizRow) {
   return (
     <div className="quiz-row">
-      <div className="quiz-row__head">
+      <div className="quiz-row_head">
         <Box
           sx={{
             width: 170,
@@ -26,16 +31,30 @@ export default function QuizRow({ name, deleteSection }: IQuizRow) {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Typography variant="body2" sx={{ color: 'white', wordBreak: 'break-all' }}>{name}</Typography>
+          <Typography variant="body2" sx={{ color: 'white', wordBreak: 'break-all', fontSize: 16 }}>{name}</Typography>
         </Box>
         <div className="quiz-row__control">
-          <Button onClick={() => deleteSection(name)} color="error" variant="contained" className='quiz-row__control_delete-button'>
+          <Button
+            className='quiz-row__control_delete-button'
+            onClick={() => deleteSection(name)}
+            color="error"
+            variant="contained"
+            sx={{
+              width: 170,
+            }}>
             <ArrowBackIosIcon />
           </Button>
-          <Button variant="contained" className='quiz-row__control_add-button'>
-            <AddIcon />
-          </Button>
         </div>
+      </div>
+      <div className="quiz-row_body">
+        {QUIZ_BLOCK_ARRAY.map(item =>
+          <QuizBlock
+            key={name + item}
+            name={name}
+            points={item}
+            isBlockSelected={isBlockSelected}
+            handleBlockClick={handleBlockClick}
+          />)}
       </div>
     </div>
   )

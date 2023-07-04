@@ -7,15 +7,15 @@ import AddSthForm from '../../Forms/AddSthForm/AddSthForm';
 interface IAddSth {
   isFormVisible: boolean;
   addSth: (name: string) => void;
-  onClick: () => void;
+  toggleFormVisibility: () => void;
   addWhat: string;
 }
 
-export default function AddSth({ isFormVisible, addSth, onClick, addWhat }: IAddSth) {
+export default function AddSth({ isFormVisible, addSth, toggleFormVisibility, addWhat }: IAddSth) {
   return (
     <div className="add-sth">
       <Button
-        onClick={onClick}
+        onClick={toggleFormVisibility}
         className='add-sth_button'
         variant="contained"
         color={isFormVisible ? "error" : "primary"}

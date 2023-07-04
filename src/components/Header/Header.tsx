@@ -30,7 +30,7 @@ export default function Header({ players, setPlayers }: IHeader) {
   }
   return (
     <header>
-      <AddSth onClick={toggleFormVisibility} addWhat='player' isFormVisible={isFormVisible} addSth={addPlayer} />
+      <AddSth toggleFormVisibility={toggleFormVisibility} addWhat='player' isFormVisible={isFormVisible} addSth={addPlayer} />
 
       <div className="players">
         {Object.values(players).map(item => <PlayerInfo key={item.name} name={item.name} points={item.points} deletePlayer={deletePlayer} />)}

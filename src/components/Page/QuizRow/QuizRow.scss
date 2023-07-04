@@ -1,17 +1,10 @@
 .quiz-row {
+  display: flex;
   padding: 10px 0;
+  gap: 50px;
 
-  &__control {
+  &_body {
     display: flex;
-    gap: 5px;
-
-    &_add-button {
-      width: 100px;
-    }
-
-    &_delete-button {
-      width: 40px;
-    }
+    gap: 10px;
   }
-
 }

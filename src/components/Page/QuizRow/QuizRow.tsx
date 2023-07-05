@@ -4,10 +4,11 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import QuizBlock from './QuizBlock/QuizBlock';
+import { useAppDispatch } from '../../../store/hooks/redux';
+import { deleteSection } from '../../../store/reducers/sectionsSlice';
 
 interface IQuizRow {
   name: string;
-  deleteSection: (name: string) => void;
   isBlockSelected: { name: string, points: number } | null;
   handleBlockClick: (name: string, points: number) => void;
 }
@@ -15,7 +16,9 @@ interface IQuizRow {
 
 const QUIZ_BLOCK_ARRAY: number[] = [100, 200, 300, 400, 500];
 
-export default function QuizRow({ name, deleteSection, isBlockSelected, handleBlockClick }: IQuizRow) {
+export default function QuizRow({ name, isBlockSelected, handleBlockClick }: IQuizRow) {
+  const dispatch = useAppDispatch();
+
   return (
     <div className="quiz-row">
       <div className="quiz-row_head">
@@ -36,7 +39,7 @@ export default function QuizRow({ name, deleteSection, isBlockSelected, handleBl
         <div className="quiz-row__control">
           <Button
             className='quiz-row__control_delete-button'
-            onClick={() => deleteSection(name)}
+            onClick={() => dispatch(deleteSection(name))}
             color="error"
             variant="contained"
             sx={{

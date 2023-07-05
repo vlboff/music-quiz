@@ -1,16 +1,16 @@
 import './PlayerInfo.scss';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { IPlayer } from '../../../App';
+import { IPlayer } from '../../../types';
 import IconButton from '@mui/material/IconButton';
+import { useAppDispatch } from '../../../store/hooks/redux';
+import { deletePlayer } from '../../../store/reducers/playersSlice';
 
-interface IPlayerInfo extends IPlayer {
-  deletePlayer: (name: string) => void;
-}
+export default function PlayerInfo({ name, points }: IPlayer) {
+  const dispatch = useAppDispatch();
 
-export default function PlayerInfo({ name, points, deletePlayer }: IPlayerInfo) {
   return (
     <div className="player">
-      <IconButton aria-label="delete" size="small" onClick={() => deletePlayer(name)}>
+      <IconButton aria-label="delete" size="small" onClick={() => dispatch(deletePlayer(name))}>
         <CancelIcon color="error" />
       </IconButton>
       <div>{name}: {points}</div>

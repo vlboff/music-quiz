@@ -2,21 +2,28 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 
-export interface IQuizBlock {
+interface IQuizBlock {
   name: string,
   points: number;
   isBlockSelected: { name: string, points: number } | null;
   handleBlockClick: (name: string, points: number) => void;
 }
 
+interface IBlockInfo {
+  name: string,
+  points: number;
+  isActive: boolean;
+  songID?: string;
+}
+
 export default function QuizBlock({ name, points, isBlockSelected, handleBlockClick }: IQuizBlock) {
-  const [active, setActive] = useState(false);
+  const [blockInfo, setBlockInfo] = useState<IBlockInfo>({ name: name, points: points, isActive: false })
 
   useEffect(() => {
-    if (isBlockSelected?.name === name && isBlockSelected.points === points && !active) {
-      setActive(true);
+    if (isBlockSelected?.name === name && isBlockSelected.points === points && !blockInfo.isActive) {
+      setBlockInfo((blockInfo) => ({ ...blockInfo, isActive: true }));
     } else {
-      setActive(false);
+      setBlockInfo((blockInfo) => ({ ...blockInfo, isActive: false }));
     }
   }, [isBlockSelected]);
 
@@ -28,7 +35,7 @@ export default function QuizBlock({ name, points, isBlockSelected, handleBlockCl
           width: 170,
           height: 100,
           padding: 1,
-          backgroundColor: `${active ? 'success' : 'primary'}.main`,
+          backgroundColor: `${blockInfo.isActive ? 'success' : 'primary'}.main`,
           borderRadius: 1,
           marginBottom: 1,
           display: 'flex',

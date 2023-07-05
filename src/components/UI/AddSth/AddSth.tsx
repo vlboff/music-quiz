@@ -6,12 +6,11 @@ import AddSthForm from '../../Forms/AddSthForm/AddSthForm';
 
 interface IAddSth {
   isFormVisible: boolean;
-  addSth: (name: string) => void;
   toggleFormVisibility: () => void;
   addWhat: string;
 }
 
-export default function AddSth({ isFormVisible, addSth, toggleFormVisibility, addWhat }: IAddSth) {
+export default function AddSth({ isFormVisible, toggleFormVisibility, addWhat }: IAddSth) {
   return (
     <div className="add-sth">
       <Button
@@ -25,7 +24,7 @@ export default function AddSth({ isFormVisible, addSth, toggleFormVisibility, ad
         {isFormVisible ? "Hide input" : `Add ${addWhat}`}
       </Button>
 
-      {isFormVisible && <AddSthForm addSth={addSth} />}
+      {isFormVisible && <AddSthForm addWhat={addWhat} />}
     </div>
   )
 }

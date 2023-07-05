@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ID } from '../../../types';
 import { useAppDispatch } from '../../../store/hooks/redux';
 import { addPlayer } from '../../../store/reducers/playersSlice';
+import { addSection } from '../../../store/reducers/sectionsSlice';
 
 interface IAppPlayerForm {
   addWhat: string
@@ -18,6 +19,10 @@ export default function AddPlayerForm({ addWhat }: IAppPlayerForm) {
   const handleSubmit = () => {
     if (name.trim() !== '' && addWhat === ID.player) {
       dispatch(addPlayer({ name: name, points: 0 }));
+      setName('');
+    }
+    if (name.trim() !== '' && addWhat === ID.section) {
+      dispatch(addSection({ name }));
       setName('');
     }
   }

@@ -2,17 +2,22 @@ import './AddSthForm.scss'
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import { useState } from "react";
+import { ID } from '../../../types';
+import { useAppDispatch } from '../../../store/hooks/redux';
+import { addPlayer } from '../../../store/reducers/playersSlice';
 
 interface IAppPlayerForm {
-  addSth: (name: string) => void
+  addWhat: string
 }
 
-export default function AddPlayerForm({ addSth }: IAppPlayerForm) {
+export default function AddPlayerForm({ addWhat }: IAppPlayerForm) {
   const [name, setName] = useState('');
 
+  const dispatch = useAppDispatch();
+
   const handleSubmit = () => {
-    if (name.trim() !== '') {
-      addSth(name);
+    if (name.trim() !== '' && addWhat === ID.player) {
+      dispatch(addPlayer({ name: name, points: 0 }));
       setName('');
     }
   }

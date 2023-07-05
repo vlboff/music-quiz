@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPlayer } from '../../App';
+import { IPlayer } from '../../types';
 
 type playersType = {
   [key: string]: IPlayer
@@ -11,17 +11,16 @@ export const playersSlice = createSlice({
   name: 'players',
   initialState,
   reducers: {
-    appPlayer(state, action: PayloadAction<IPlayer>) {
-      const newPlayer = { [action.payload.name]: { name: action.payload.name, points: 0 } };
-      state = { ...state, ...newPlayer } as { [key: string]: IPlayer }
+    addPlayer(state, action: PayloadAction<IPlayer>) {
+      const { name } = action.payload;
+      state[name] = { name, points: 0 };
     },
-    deletePlayer(state, action: PayloadAction<IPlayer>) {
-      const currentPlayers = { ...state };
-      delete currentPlayers[action.payload.name];
-      state = { ...currentPlayers };
+    deletePlayer(state, action: PayloadAction<string>) {
+      const name = action.payload;
+      delete state[name];
     }
   }
 });
 
-export const { appPlayer, deletePlayer } = playersSlice.actions;
+export const { addPlayer, deletePlayer } = playersSlice.actions;
 export default playersSlice.reducer;

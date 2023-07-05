@@ -1,15 +1,18 @@
+import { useEffect, useState } from 'react'
 import './Page.scss'
 import QuizRow from './QuizRow/QuizRow'
-import { useEffect, useState } from 'react'
 import AddSth from '../UI/AddSth/AddSth'
 import Button from '@mui/material/Button';
+import Modal from '../UI/Modals/Modal';
 import { useAppSelector } from '../../store/hooks/redux';
-import { ID } from '../../types';
+import { ID, TypesOfModal } from '../../types';
 
 export default function Page() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isBlockSelected, setIsBlockSelected] = useState<{ name: string, points: number } | null>(null);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isStartButtonDisabled, setIsStartButtonDisabled] = useState(true);
+  const [isModalActive, setIsModalActive] = useState(false);
+  const [modalType, setModalType] = useState('');
   const [isQuizStarted, setIsQuizStarted] = useState(false);
 
   const sections = useAppSelector((state) => state.sections);
@@ -21,13 +24,15 @@ export default function Page() {
 
   const handleBlockClick = (name: string, points: number) => {
     setIsBlockSelected({ name: name, points: points });
+    setIsModalActive(true);
+    setModalType(TypesOfModal.addSong);
   };
 
   useEffect(() => {
     if (Object.values(sections).length > 0 && Object.values(players).length > 0) {
-      setIsButtonDisabled(false);
+      setIsStartButtonDisabled(false);
     } else {
-      setIsButtonDisabled(true);
+      setIsStartButtonDisabled(true);
     }
   }, [sections, players])
 
@@ -47,11 +52,12 @@ export default function Page() {
       />
       <Button
         variant="contained"
-        disabled={isButtonDisabled}
+        disabled={isStartButtonDisabled}
         sx={{ minWidth: 170, marginTop: 9 }}
       >
         {isQuizStarted ? 'new game' : 'start quiz'}
       </Button>
+      <Modal modalType={modalType} setModalType={setModalType} isModalActive={isModalActive} setIsModalActive={setIsModalActive} />
     </main>
   )
 }

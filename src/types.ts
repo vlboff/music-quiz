@@ -11,3 +11,7 @@ export enum ID {
   player = 'player',
   section = 'section'
 }
+
+export enum TypesOfModal {
+  addSong = 'addSong',
+}

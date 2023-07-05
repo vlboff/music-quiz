@@ -2,7 +2,7 @@ import './AddSth.scss'
 import Button from '@mui/material/Button';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AddSthForm from '../../Forms/AddSthForm/AddSthForm';
+import AddSthForm from '../Forms/AddSthForm/AddSthForm';
 
 interface IAddSth {
   isFormVisible: boolean;

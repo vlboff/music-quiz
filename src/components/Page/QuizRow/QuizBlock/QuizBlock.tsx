@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 interface IQuizBlock {
   name: string,
   points: number;
-  isBlockSelected: { name: string, points: number } | null;
+  selectedBlock: { name: string, points: number } | null;
   handleBlockClick: (name: string, points: number) => void;
 }
 
@@ -16,16 +16,16 @@ interface IBlockInfo {
   songID?: string;
 }
 
-export default function QuizBlock({ name, points, isBlockSelected, handleBlockClick }: IQuizBlock) {
+export default function QuizBlock({ name, points, selectedBlock, handleBlockClick }: IQuizBlock) {
   const [blockInfo, setBlockInfo] = useState<IBlockInfo>({ name: name, points: points, isActive: false })
 
   useEffect(() => {
-    if (isBlockSelected?.name === name && isBlockSelected.points === points && !blockInfo.isActive) {
+    if (selectedBlock?.name === name && selectedBlock.points === points && !blockInfo.isActive) {
       setBlockInfo((blockInfo) => ({ ...blockInfo, isActive: true }));
     } else {
       setBlockInfo((blockInfo) => ({ ...blockInfo, isActive: false }));
     }
-  }, [isBlockSelected]);
+  }, [selectedBlock]);
 
   return (
     <div className='quiz-block'>

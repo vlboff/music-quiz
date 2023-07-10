@@ -9,14 +9,14 @@ import { deleteSection } from '../../../store/reducers/sectionsSlice';
 
 interface IQuizRow {
   name: string;
-  isBlockSelected: { name: string, points: number } | null;
+  selectedBlock: { name: string, points: number } | null;
   handleBlockClick: (name: string, points: number) => void;
 }
 
 
 const QUIZ_BLOCK_ARRAY: number[] = [100, 200, 300, 400, 500];
 
-export default function QuizRow({ name, isBlockSelected, handleBlockClick }: IQuizRow) {
+export default function QuizRow({ name, selectedBlock, handleBlockClick }: IQuizRow) {
   const dispatch = useAppDispatch();
 
   return (
@@ -55,7 +55,7 @@ export default function QuizRow({ name, isBlockSelected, handleBlockClick }: IQu
             key={name + item}
             name={name}
             points={item}
-            isBlockSelected={isBlockSelected}
+            selectedBlock={selectedBlock}
             handleBlockClick={handleBlockClick}
           />)}
       </div>

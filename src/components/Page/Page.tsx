@@ -9,7 +9,7 @@ import { ID, TypesOfModal } from '../../types';
 
 export default function Page() {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [isBlockSelected, setIsBlockSelected] = useState<{ name: string, points: number } | null>(null);
+  const [selectedBlock, setSelectedBlock] = useState<{ name: string, points: number } | null>(null);
   const [isStartButtonDisabled, setIsStartButtonDisabled] = useState(true);
   const [isModalActive, setIsModalActive] = useState(false);
   const [modalType, setModalType] = useState('');
@@ -23,7 +23,7 @@ export default function Page() {
   };
 
   const handleBlockClick = (name: string, points: number) => {
-    setIsBlockSelected({ name: name, points: points });
+    setSelectedBlock({ name: name, points: points });
     setIsModalActive(true);
     setModalType(TypesOfModal.addSong);
   };
@@ -33,6 +33,7 @@ export default function Page() {
       setIsStartButtonDisabled(false);
     } else {
       setIsStartButtonDisabled(true);
+      console.log(sections);
     }
   }, [sections, players])
 
@@ -42,7 +43,7 @@ export default function Page() {
         <QuizRow
           name={item.name}
           key={item.name}
-          isBlockSelected={isBlockSelected}
+          selectedBlock={selectedBlock}
           handleBlockClick={handleBlockClick}
         />)}
       <AddSth
@@ -57,7 +58,13 @@ export default function Page() {
       >
         {isQuizStarted ? 'new game' : 'start quiz'}
       </Button>
-      <Modal modalType={modalType} setModalType={setModalType} isModalActive={isModalActive} setIsModalActive={setIsModalActive} />
+      <Modal
+        modalType={modalType}
+        setModalType={setModalType}
+        isModalActive={isModalActive}
+        setIsModalActive={setIsModalActive}
+        selectedBlock={selectedBlock}
+      />
     </main>
   )
 }

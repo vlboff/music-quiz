@@ -7,13 +7,12 @@ export interface ISection {
   name: string;
 }
 
-export enum ID {
-  player = 'player',
-  section = 'section'
-}
-
-export enum TypesOfModal {
-  addSong = 'addSong',
+export interface IBlock {
+  points: number;
+  authorName: string | null;
+  trackName: string | null;
+  trackID: string | null;
+  previewUrl: string | null;
 }
 
 export interface Profile {
@@ -52,7 +51,7 @@ export interface Profile {
 
 // Search type
 
-export interface Search {
+export interface ISearch {
   tracks: Tracks
   artists: Artists
   albums: Albums

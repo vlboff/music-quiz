@@ -3,7 +3,7 @@ import './Header.scss'
 import AddSth from '../UI/AddSth/AddSth';
 import PlayerInfo from './PlayerInfo/PlayerInfo';
 import { useAppSelector } from '../../store/hooks/redux';
-import { ID } from '../../types';
+import { ID } from '../../enums';
 import Button from '@mui/material/Button';
 import { getProfile } from '../../api/getProfile';
 import { useEffect } from "react";
@@ -46,7 +46,7 @@ export default function Header() {
 
   useEffect(() => {
     if (token && token.length > 0) {
-      console.log(token);
+      // console.log(token);
       const fetchData = async () => {
         const profile = await getProfile();
         setProfile(profile);

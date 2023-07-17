@@ -1,9 +1,9 @@
-import { Search } from "../types";
+import { Item } from "../types";
 
-export async function getSearch(query: string): Promise<Search> {
+export async function getSearch(query: string): Promise<Item[]> {
   const accessToken = sessionStorage.getItem('token');
 
-  const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist%2Ctrack&market=BY&limit=10`, {
+  const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist%2Ctrack&market=BY&limit=5`, {
     headers: {
       Authorization: 'Bearer ' + accessToken
     }

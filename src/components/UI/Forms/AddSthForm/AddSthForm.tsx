@@ -2,7 +2,7 @@ import './AddSthForm.scss'
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import { useState } from "react";
-import { ID } from '../../../../types';
+import { ID } from '../../../../enums';
 import { useAppDispatch } from '../../../../store/hooks/redux';
 import { addPlayer } from '../../../../store/reducers/playersSlice';
 import { addSection } from '../../../../store/reducers/sectionsSlice';

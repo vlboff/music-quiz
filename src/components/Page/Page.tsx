@@ -3,16 +3,15 @@ import './Page.scss'
 import QuizRow from './QuizRow/QuizRow'
 import AddSth from '../UI/AddSth/AddSth'
 import Button from '@mui/material/Button';
-import Modal from '../UI/Modals/Modal';
+import AddSongModal from '../UI/Modals/AddSongModal';
 import { useAppSelector } from '../../store/hooks/redux';
-import { ID, TypesOfModal } from '../../types';
+import { ID } from '../../enums';
 
 export default function Page() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [selectedBlock, setSelectedBlock] = useState<{ name: string, points: number } | null>(null);
   const [isStartButtonDisabled, setIsStartButtonDisabled] = useState(true);
   const [isModalActive, setIsModalActive] = useState(false);
-  const [modalType, setModalType] = useState('');
   const [isQuizStarted, setIsQuizStarted] = useState(false);
 
   const sections = useAppSelector((state) => state.sections);
@@ -25,7 +24,6 @@ export default function Page() {
   const handleBlockClick = (name: string, points: number) => {
     setSelectedBlock({ name: name, points: points });
     setIsModalActive(true);
-    setModalType(TypesOfModal.addSong);
   };
 
   useEffect(() => {
@@ -33,7 +31,6 @@ export default function Page() {
       setIsStartButtonDisabled(false);
     } else {
       setIsStartButtonDisabled(true);
-      console.log(sections);
     }
   }, [sections, players])
 
@@ -58,9 +55,7 @@ export default function Page() {
       >
         {isQuizStarted ? 'new game' : 'start quiz'}
       </Button>
-      <Modal
-        modalType={modalType}
-        setModalType={setModalType}
+      <AddSongModal
         isModalActive={isModalActive}
         setIsModalActive={setIsModalActive}
         selectedBlock={selectedBlock}

@@ -24,10 +24,11 @@ export default function Page() {
   const handleBlockClick = (name: string, points: number) => {
     setSelectedBlock({ name: name, points: points });
     setIsModalActive(true);
+    console.log(sections);
   };
 
   useEffect(() => {
-    if (Object.values(sections).length > 0 && Object.values(players).length > 0) {
+    if (Object.keys(sections).length > 0 && Object.values(players).length > 0) {
       setIsStartButtonDisabled(false);
     } else {
       setIsStartButtonDisabled(true);
@@ -36,10 +37,10 @@ export default function Page() {
 
   return (
     <main>
-      {Object.values(sections).map(item =>
+      {Object.keys(sections).map(item =>
         <QuizRow
-          name={item.name}
-          key={item.name}
+          name={item}
+          key={item}
           selectedBlock={selectedBlock}
           handleBlockClick={handleBlockClick}
         />)}

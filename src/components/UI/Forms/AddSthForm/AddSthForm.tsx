@@ -22,7 +22,10 @@ export default function AddPlayerForm({ addWhat }: IAppPlayerForm) {
       setName('');
     }
     if (name.trim() !== '' && addWhat === ID.section) {
-      dispatch(addSection({ name }));
+      dispatch(addSection({
+        name,
+        blocks: []
+      }));
       setName('');
     }
   }

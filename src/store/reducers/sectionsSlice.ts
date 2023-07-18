@@ -1,26 +1,32 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ISection } from '../../types';
+import { IBlock, ISection } from '../../types';
 
-type sectionsType = {
-  [key: string]: ISection
-}
-
-const initialState: sectionsType = {};
+const initialState: ISection = {};
 
 export const sectionsSlice = createSlice({
   name: 'sections',
   initialState,
   reducers: {
-    addSection(state, action: PayloadAction<ISection>) {
-      const { name } = action.payload;
-      state[name] = { name };
+    addSection(state, action: PayloadAction<{ name: string; blocks: IBlock[] }>) {
+      const { name, blocks } = action.payload;
+      state[name] = blocks;
     },
     deleteSection(state, action: PayloadAction<string>) {
       const name = action.payload;
       delete state[name];
+    },
+    addBlockInfo(state, action: PayloadAction<{ sectionName: string; block: IBlock }>) {
+      const { sectionName, block } = action.payload;
+      const section = state[sectionName];
+      const existingIndex = section.findIndex((item) => item.points === block.points);
+      if (existingIndex !== -1) {
+        section[existingIndex] = block;
+      } else {
+        section.push(block);
+      }
     }
   }
 });
 
-export const { addSection, deleteSection } = sectionsSlice.actions;
+export const { addSection, deleteSection, addBlockInfo } = sectionsSlice.actions;
 export default sectionsSlice.reducer;

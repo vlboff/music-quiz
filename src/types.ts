@@ -4,7 +4,7 @@ export interface IPlayer {
 }
 
 export interface ISection {
-  name: string;
+  [key: string]: IBlock[];
 }
 
 export interface IBlock {

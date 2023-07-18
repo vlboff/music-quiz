@@ -55,7 +55,6 @@ export default function QuizBlock({ name, points, selectedBlock, handleBlockClic
           width: 170,
           height: 100,
           padding: 1,
-          // backgroundColor: `${blockInfo.isActive ? 'success' : 'primary'}.main`,
           backgroundColor: `${constructorModeActive ? 'primary.main' : 'white'}`,
           border: '1px solid #1976d2',
           borderRadius: 1,

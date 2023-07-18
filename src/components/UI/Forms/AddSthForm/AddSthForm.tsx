@@ -2,7 +2,7 @@ import './AddSthForm.scss'
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import { useState } from "react";
-import { ID } from '../../../../enums';
+import { InputID } from '../../../../enums';
 import { useAppDispatch } from '../../../../store/hooks/redux';
 import { addPlayer } from '../../../../store/reducers/playersSlice';
 import { addSection } from '../../../../store/reducers/sectionsSlice';
@@ -17,14 +17,48 @@ export default function AddPlayerForm({ addWhat }: IAppPlayerForm) {
   const dispatch = useAppDispatch();
 
   const handleSubmit = () => {
-    if (name.trim() !== '' && addWhat === ID.player) {
+    if (name.trim() !== '' && addWhat === InputID.player) {
       dispatch(addPlayer({ name: name, points: 0 }));
       setName('');
     }
-    if (name.trim() !== '' && addWhat === ID.section) {
+    if (name.trim() !== '' && addWhat === InputID.section) {
       dispatch(addSection({
         name,
-        blocks: []
+        blocks: [{
+          points: 100,
+          authorName: null,
+          trackName: null,
+          trackID: null,
+          previewUrl: null,
+        },
+        {
+          points: 200,
+          authorName: null,
+          trackName: null,
+          trackID: null,
+          previewUrl: null,
+        },
+        {
+          points: 300,
+          authorName: null,
+          trackName: null,
+          trackID: null,
+          previewUrl: null,
+        },
+        {
+          points: 400,
+          authorName: null,
+          trackName: null,
+          trackID: null,
+          previewUrl: null,
+        },
+        {
+          points: 500,
+          authorName: null,
+          trackName: null,
+          trackID: null,
+          previewUrl: null,
+        }]
       }));
       setName('');
     }

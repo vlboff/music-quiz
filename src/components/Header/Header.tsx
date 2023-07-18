@@ -3,7 +3,7 @@ import './Header.scss'
 import AddSth from '../UI/AddSth/AddSth';
 import PlayerInfo from './PlayerInfo/PlayerInfo';
 import { useAppSelector } from '../../store/hooks/redux';
-import { ID } from '../../enums';
+import { InputID } from '../../enums';
 import Button from '@mui/material/Button';
 import { getProfile } from '../../api/getProfile';
 import { useEffect } from "react";
@@ -65,7 +65,7 @@ export default function Header() {
 
   return (
     <header>
-      <AddSth toggleFormVisibility={toggleFormVisibility} addWhat={ID.player} isFormVisible={isFormVisible} />
+      <AddSth toggleFormVisibility={toggleFormVisibility} addWhat={InputID.player} isFormVisible={isFormVisible} />
 
       <div className="players">
         {Object.values(players).map(item => <PlayerInfo key={item.name} name={item.name} points={item.points} />)}

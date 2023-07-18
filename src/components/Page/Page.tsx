@@ -5,7 +5,8 @@ import AddSth from '../UI/AddSth/AddSth'
 import Button from '@mui/material/Button';
 import AddSongModal from '../UI/Modals/AddSongModal';
 import { useAppSelector } from '../../store/hooks/redux';
-import { ID } from '../../enums';
+import { InputID } from '../../enums';
+import { ISection } from '../../types';
 
 export default function Page() {
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -24,11 +25,15 @@ export default function Page() {
   const handleBlockClick = (name: string, points: number) => {
     setSelectedBlock({ name: name, points: points });
     setIsModalActive(true);
-    console.log(sections);
   };
 
   useEffect(() => {
-    if (Object.keys(sections).length > 0 && Object.values(players).length > 0) {
+    const isAllBlockFull = (sections: ISection) => {
+      const sectionsArray = Object.values(sections).map(arr => arr.every(i => i.previewUrl && i.previewUrl.length > 0))
+      return sectionsArray.every(i => i === true);
+    }
+
+    if (isAllBlockFull(sections) && Object.values(players).length > 0) {
       setIsStartButtonDisabled(false);
     } else {
       setIsStartButtonDisabled(true);
@@ -46,7 +51,7 @@ export default function Page() {
         />)}
       <AddSth
         toggleFormVisibility={toggleFormVisibility}
-        addWhat={ID.section}
+        addWhat={InputID.section}
         isFormVisible={isFormVisible}
       />
       <Button

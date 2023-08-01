@@ -1,30 +1,29 @@
 import { useEffect, useState } from 'react'
 import './Page.scss'
+import { ModeID } from '../../enums'
 import QuizRow from './QuizRow/QuizRow'
 import AddSth from '../UI/AddSth/AddSth'
 import Button from '@mui/material/Button';
 import AddSongModal from '../UI/Modals/AddSongModal';
 import { useAppSelector } from '../../store/hooks/redux';
+import { useAppDispatch } from '../../store/hooks/redux';
+import { setMode } from '../../store/reducers/modeSlice';
 import { InputID } from '../../enums';
 import { ISection } from '../../types';
 
 export default function Page() {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [selectedBlock, setSelectedBlock] = useState<{ name: string, points: number } | null>(null);
   const [isStartButtonDisabled, setIsStartButtonDisabled] = useState(true);
-  const [isModalActive, setIsModalActive] = useState(false);
-  const [isQuizStarted, setIsQuizStarted] = useState(false);
+  const [isAddSongModalActive, setIsAddSongModalActive] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const sections = useAppSelector((state) => state.sections);
   const players = useAppSelector((state) => state.players);
+  const mode = useAppSelector((state) => state.mode);
 
   const toggleFormVisibility = () => {
     setIsFormVisible(!isFormVisible);
-  };
-
-  const handleBlockClick = (name: string, points: number) => {
-    setSelectedBlock({ name: name, points: points });
-    setIsModalActive(true);
   };
 
   useEffect(() => {
@@ -33,7 +32,7 @@ export default function Page() {
       return sectionsArray.every(i => i === true);
     }
 
-    if (isAllBlockFull(sections) && Object.values(players).length > 0) {
+    if (Object.values(sections).length > 0 && isAllBlockFull(sections) && Object.values(players).length > 0) {
       setIsStartButtonDisabled(false);
     } else {
       setIsStartButtonDisabled(true);
@@ -46,25 +45,26 @@ export default function Page() {
         <QuizRow
           name={item}
           key={item}
-          selectedBlock={selectedBlock}
-          handleBlockClick={handleBlockClick}
+          setIsAddSongModalActive={setIsAddSongModalActive}
         />)}
-      <AddSth
-        toggleFormVisibility={toggleFormVisibility}
-        addWhat={InputID.section}
-        isFormVisible={isFormVisible}
-      />
+      { mode === ModeID.constructor ?
+        <AddSth
+          toggleFormVisibility={toggleFormVisibility}
+          addWhat={InputID.section}
+          isFormVisible={isFormVisible}
+        /> :
+        null }
       <Button
+        onClick={() => dispatch(setMode(mode === ModeID.game ? ModeID.constructor : ModeID.game))}
         variant="contained"
         disabled={isStartButtonDisabled}
         sx={{ minWidth: 170, marginTop: 9 }}
       >
-        {isQuizStarted ? 'new game' : 'start quiz'}
+        {mode === ModeID.game ? 'new game' : 'start quiz'}
       </Button>
       <AddSongModal
-        isModalActive={isModalActive}
-        setIsModalActive={setIsModalActive}
-        selectedBlock={selectedBlock}
+        isAddSongModalActive={isAddSongModalActive}
+        setIsAddSongModalActive={setIsAddSongModalActive}
       />
     </main>
   )

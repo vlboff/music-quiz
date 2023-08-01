@@ -3,7 +3,7 @@ import './Header.scss'
 import AddSth from '../UI/AddSth/AddSth';
 import PlayerInfo from './PlayerInfo/PlayerInfo';
 import { useAppSelector } from '../../store/hooks/redux';
-import { InputID } from '../../enums';
+import { InputID, ModeID } from '../../enums';
 import Button from '@mui/material/Button';
 import { getProfile } from '../../api/getProfile';
 import { useEffect } from "react";
@@ -15,6 +15,7 @@ export default function Header() {
   const [profile, setProfile] = useState<Profile | null>(null);
 
   const players = useAppSelector((state) => state.players);
+  const mode = useAppSelector((state) => state.mode);
 
   const toggleFormVisibility = () => {
     setIsFormVisible(!isFormVisible);
@@ -65,7 +66,7 @@ export default function Header() {
 
   return (
     <header>
-      <AddSth toggleFormVisibility={toggleFormVisibility} addWhat={InputID.player} isFormVisible={isFormVisible} />
+      { mode === ModeID.constructor ? <AddSth toggleFormVisibility={toggleFormVisibility} addWhat={InputID.player} isFormVisible={isFormVisible} /> : null }
 
       <div className="players">
         {Object.values(players).map(item => <PlayerInfo key={item.name} name={item.name} points={item.points} />)}

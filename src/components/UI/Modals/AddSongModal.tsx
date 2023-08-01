@@ -5,20 +5,22 @@ import { useEffect, useMemo, useState } from "react";
 import { debounce } from "../../../utils";
 import { getSearch } from '../../../api/getSearch';
 import { Item } from '../../../types';
+import { useAppSelector } from '../../../store/hooks/redux';
 import { useAppDispatch } from '../../../store/hooks/redux';
 import { addBlockInfo } from '../../../store/reducers/sectionsSlice'
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 interface IModal {
-  isModalActive: boolean;
-  setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedBlock: { name: string, points: number } | null;
+  isAddSongModalActive: boolean;
+  setIsAddSongModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Modal({ isModalActive, setIsModalActive, selectedBlock }: IModal) {
+export default function Modal({ isAddSongModalActive, setIsAddSongModalActive }: IModal) {
   const [name, setName] = useState('');
   const [serchedItems, setSerchedItems] = useState<Item[] | null>(null);
+
+  const selectedBlock = useAppSelector(state => state.selectedBlock)
 
   const dispatch = useAppDispatch();
 
@@ -39,7 +41,7 @@ export default function Modal({ isModalActive, setIsModalActive, selectedBlock }
   }, [name, delayedSearch])
 
   return (
-    <div className={`modal ${isModalActive ? 'active' : ''}`} onClick={() => setIsModalActive(false)}>
+    <div className={`modal ${isAddSongModalActive ? 'active' : ''}`} onClick={() => setIsAddSongModalActive(false)}>
       <Box onClick={(e) => e.stopPropagation()}
         sx={{
           width: 300,
@@ -73,7 +75,7 @@ export default function Modal({ isModalActive, setIsModalActive, selectedBlock }
                     },
                   })
                 );
-                setIsModalActive(false);
+                setIsAddSongModalActive(false);
               }}
               key={i.id}>
               {`${i.artists[0].name} - ${i.name}`}

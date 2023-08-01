@@ -3,6 +3,7 @@ import playersSlice from './reducers/playersSlice';
 import sectionsSlice from './reducers/sectionsSlice';
 import tokenSlice from './reducers/tokenSlice';
 import modeSlice from './reducers/modeSlice';
+import selectedBlockSlice from './reducers/selectedBlockSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     sections: sectionsSlice,
     token: tokenSlice,
     mode: modeSlice,
+    selectedBlock: selectedBlockSlice,
   },
 });
 

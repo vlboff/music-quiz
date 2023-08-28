@@ -1,11 +1,10 @@
-import './PlayerInfo.scss';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { IPlayer } from '../../../types';
-import { ModeID } from '../../../enums';
-import IconButton from '@mui/material/IconButton';
-import { useAppSelector } from '../../../store/hooks/redux';
-import { useAppDispatch } from '../../../store/hooks/redux';
-import { deletePlayer } from '../../../store/reducers/playersSlice';
+import { IPlayer } from "../../../types";
+import { ModeID } from "../../../enums";
+import { useAppSelector } from "../../../store/hooks/redux";
+import { useAppDispatch } from "../../../store/hooks/redux";
+import { deletePlayer } from "../../../store/reducers/playersSlice";
+import Stack from "@mui/material/Stack";
+import Chip from "@mui/material/Chip";
 
 export default function PlayerInfo({ name, points }: IPlayer) {
   const dispatch = useAppDispatch();
@@ -13,13 +12,20 @@ export default function PlayerInfo({ name, points }: IPlayer) {
   const mode = useAppSelector((state) => state.mode);
 
   return (
-    <div className="player">
-      {mode === ModeID.constructor ?
-      <IconButton aria-label="delete" size="small" onClick={() => dispatch(deletePlayer(name))}>
-        <CancelIcon color="error" />
-      </IconButton> :
-      null}
-      <div>{name}: {points}</div>
-    </div>
-  )
+    <Stack direction="row" alignItems="center">
+      {mode === ModeID.constructor ? (
+        <Chip
+          sx={{ fontSize: 16 }}
+          label={`${name}: ${points}`}
+          onDelete={() => dispatch(deletePlayer(name))}
+        />
+      ) : (
+        <Chip
+          sx={{ fontSize: 16 }}
+          label={`${name}: ${points}`}
+          variant="outlined"
+        />
+      )}
+    </Stack>
+  );
 }

@@ -1,13 +1,13 @@
-import './QuizRow.scss'
-import Button from '@mui/material/Button'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import QuizBlock from './QuizBlock/QuizBlock';
-import { ModeID } from '../../../enums';
-import { useAppSelector } from '../../../store/hooks/redux';
-import { useAppDispatch } from '../../../store/hooks/redux';
-import { deleteSection } from '../../../store/reducers/sectionsSlice';
+import "./QuizRow.scss";
+import Button from "@mui/material/Button";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import QuizBlock from "./QuizBlock/QuizBlock";
+import { ModeID } from "../../../enums";
+import { useAppSelector } from "../../../store/hooks/redux";
+import { useAppDispatch } from "../../../store/hooks/redux";
+import { deleteSection } from "../../../store/reducers/sectionsSlice";
 
 interface IQuizRow {
   name: string;
@@ -29,39 +29,47 @@ export default function QuizRow({ name, setIsAddSongModalActive }: IQuizRow) {
             width: 170,
             height: 100,
             padding: 1,
-            backgroundColor: 'primary.main',
+            backgroundColor: "primary.main",
             borderRadius: 1,
             marginBottom: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Typography variant="body2" sx={{ color: 'white', wordBreak: 'break-all', fontSize: 16 }}>{name}</Typography>
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Typography
+            variant="body2"
+            sx={{ color: "white", wordBreak: "break-all", fontSize: 16 }}
+          >
+            {name}
+          </Typography>
         </Box>
-        {mode === ModeID.constructor ?
+        {mode === ModeID.constructor ? (
           <div className="quiz-row__control">
             <Button
-              className='quiz-row__control_delete-button'
+              className="quiz-row__control_delete-button"
               onClick={() => dispatch(deleteSection(name))}
               color="error"
               variant="contained"
               sx={{
                 width: 170,
-              }}>
-              <ArrowBackIosIcon />
+              }}
+            >
+              <DeleteForeverIcon />
             </Button>
-          </div> :
-          null}
+          </div>
+        ) : null}
       </div>
       <div className="quiz-row_body">
-        {QUIZ_BLOCK_ARRAY.map(item =>
+        {QUIZ_BLOCK_ARRAY.map((item) => (
           <QuizBlock
             key={name + item}
             name={name}
             points={item}
             setIsAddSongModalActive={setIsAddSongModalActive}
-          />)}
+          />
+        ))}
       </div>
     </div>
-  )
+  );
 }

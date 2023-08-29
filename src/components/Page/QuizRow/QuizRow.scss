@@ -1,10 +1,11 @@
 .quiz-row {
   display: flex;
   padding: 10px 0;
-  gap: 50px;
+  gap: 100px;
 
   &_body {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
   }
 }

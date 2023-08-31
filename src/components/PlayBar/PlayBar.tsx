@@ -1,14 +1,14 @@
 import "./PlayBar.scss";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Slider from "@mui/material/Slider";
+// import Typography from "@mui/material/Typography";
+// import Slider from "@mui/material/Slider";
 import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
 import PauseRounded from "@mui/icons-material/PauseRounded";
 import PlayArrowRounded from "@mui/icons-material/PlayArrowRounded";
-import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
-import VolumeDownRounded from "@mui/icons-material/VolumeDownRounded";
+// import VolumeUpRounded from "@mui/icons-material/VolumeUpRounded";
+// import VolumeDownRounded from "@mui/icons-material/VolumeDownRounded";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../store/hooks/redux";
 import Paper from "@mui/material/Paper";
@@ -25,21 +25,21 @@ const Widget = styled("div")(({ theme }) => ({
     theme.palette.mode === "dark" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.4)",
 }));
 
-const TinyText = styled(Typography)({
-  fontSize: "0.75rem",
-  opacity: 0.38,
-  fontWeight: 500,
-  letterSpacing: 0.2,
-});
+// const TinyText = styled(Typography)({
+//   fontSize: "0.75rem",
+//   opacity: 0.38,
+//   fontWeight: 500,
+//   letterSpacing: 0.2,
+// });
 
 export default function PlayBar() {
   const theme = useTheme();
-  const duration = 200; // seconds
+  // const duration = 200; // seconds
   const mainIconColor = theme.palette.mode === "dark" ? "#fff" : "#000";
-  const lightIconColor =
-    theme.palette.mode === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)";
+  // const lightIconColor =
+  //   theme.palette.mode === "dark" ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)";
 
-  const [position, setPosition] = useState(32);
+  // const [position, setPosition] = useState(32);
   const [paused, setPaused] = useState(true);
   const [audioSrc, setAudioSrc] = useState<string | null | undefined>("");
 
@@ -48,11 +48,11 @@ export default function PlayBar() {
 
   const audio = document.querySelector("audio") as HTMLAudioElement;
 
-  const formatDuration = (value: number) => {
-    const minute = Math.floor(value / 60);
-    const secondLeft = value - minute * 60;
-    return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
-  };
+  // const formatDuration = (value: number) => {
+  //   const minute = Math.floor(value / 60);
+  //   const secondLeft = value - minute * 60;
+  //   return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`;
+  // };
 
   const PlayPauseAudio = () => {
     setPaused(!paused);

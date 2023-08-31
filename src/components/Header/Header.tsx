@@ -23,7 +23,7 @@ export default function Header() {
   };
 
   const CLIENT_ID = "a2d1920952a842d7b6a51caa84cc97f2";
-  const REDIRECT_URI = "http://localhost:5173/";
+  const REDIRECT_URI = "https://music-quiz-tau.vercel.app/";
   const AUTORIZATION_URL = "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = "token";
 

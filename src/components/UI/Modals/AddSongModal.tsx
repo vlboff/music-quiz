@@ -96,6 +96,7 @@ export default function Modal({
                           trackName: i.name,
                           trackID: i.id,
                           previewUrl: i.preview_url,
+                          winner: null,
                         },
                       })
                     );

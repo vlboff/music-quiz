@@ -7,6 +7,8 @@ import AddSongModal from "../UI/Modals/AddSongModal";
 import { useAppSelector } from "../../store/hooks/redux";
 import { useAppDispatch } from "../../store/hooks/redux";
 import { setMode } from "../../store/reducers/modeSlice";
+import { resetSections } from "../../store/reducers/sectionsSlice";
+import { resetPlayers } from "../../store/reducers/playersSlice";
 import { InputID } from "../../enums";
 import { ISection } from "../../types";
 import Box from "@mui/material/Box";
@@ -39,6 +41,10 @@ export default function Page() {
   };
 
   const toggleMode = () => {
+    if (mode === ModeID.game) {
+      dispatch(resetSections());
+      dispatch(resetPlayers());
+    }
     dispatch(setMode(mode === ModeID.game ? ModeID.constructor : ModeID.game));
     closeDialog();
   };

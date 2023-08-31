@@ -86,7 +86,7 @@ export default function PlayBar() {
       }}
     >
       <Widget>
-        <Slider
+        {/* <Slider
           aria-label="time-indicator"
           size="small"
           value={position}
@@ -120,8 +120,8 @@ export default function PlayBar() {
               opacity: 0.28,
             },
           }}
-        />
-        <Box
+        /> */}
+        {/* <Box
           sx={{
             display: "flex",
             alignItems: "center",
@@ -131,7 +131,7 @@ export default function PlayBar() {
         >
           <TinyText>{formatDuration(position)}</TinyText>
           <TinyText>-{formatDuration(duration - position)}</TinyText>
-        </Box>
+        </Box> */}
         <Box
           sx={{
             display: "flex",
@@ -161,7 +161,7 @@ export default function PlayBar() {
             )}
           </IconButton>
         </Box>
-        <Stack
+        {/* <Stack
           spacing={2}
           direction="row"
           sx={{ mb: 1, px: 1 }}
@@ -191,9 +191,12 @@ export default function PlayBar() {
             }}
           />
           <VolumeUpRounded htmlColor={lightIconColor} />
-        </Stack>
+        </Stack> */}
       </Widget>
-      <audio src={audioSrc ? audioSrc : ""}></audio>
+      <audio
+        src={audioSrc ? audioSrc : ""}
+        onEnded={() => setPaused(true)}
+      ></audio>
     </Paper>
   );
 }

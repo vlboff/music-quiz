@@ -1,0 +1,17 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+}
+
+.active {
+  transition: transform 0.2s;
+  transform: scale(1);
+}

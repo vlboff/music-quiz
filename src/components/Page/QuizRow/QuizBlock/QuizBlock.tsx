@@ -134,11 +134,7 @@ export default function QuizBlock({
   return (
     <div className="quiz-block">
       <Tooltip
-        title={
-          mode === ModeID.game && winner.length > 0
-            ? `${trackInfo?.authorName} - ${trackInfo?.trackName}`
-            : null
-        }
+        title={mode === ModeID.game && winner.length > 0 ? winner : null}
         placement="top"
       >
         <Box
@@ -180,13 +176,8 @@ export default function QuizBlock({
           ) : null}
 
           {mode === ModeID.game && winner.length > 0 ? (
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 14,
-              }}
-            >
-              {winner}
+            <Typography variant="h2" sx={{ color: `white`, fontSize: 14 }}>
+              {`${trackInfo?.authorName} - ${trackInfo?.trackName}`}
             </Typography>
           ) : null}
 

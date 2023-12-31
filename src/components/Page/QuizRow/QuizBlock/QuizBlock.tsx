@@ -74,15 +74,6 @@ export default function QuizBlock({
       const points = pointsArr.reduce((sum, current) => sum + current, 0);
       dispatch(addPlayersPoints({ name: allPlayers[i].name, points }));
     }
-    // const winnersOnly = Object.values(sections).map((section) =>
-    //   section.filter((block) => block.winner === winner && winner.length > 0)
-    // );
-    // const pointsArr = winnersOnly.map((section) =>
-    //   section.reduce((sum, current) => sum + current.points, 0)
-    // );
-    // const points = pointsArr.reduce((sum, current) => sum + current, 0);
-    // console.log(winnersOnly);
-    // dispatch(addPlayersPoints({ name: winner, points }));
   };
 
   const bgColor = () => {
@@ -114,7 +105,6 @@ export default function QuizBlock({
         result();
       }
     }
-    // console.log(sections);
   }, [sections]);
 
   useEffect(() => {
@@ -144,11 +134,7 @@ export default function QuizBlock({
   return (
     <div className="quiz-block">
       <Tooltip
-        title={
-          mode === ModeID.game && winner.length > 0
-            ? `${trackInfo?.authorName} - ${trackInfo?.trackName}`
-            : null
-        }
+        title={mode === ModeID.game && winner.length > 0 ? winner : null}
         placement="top"
       >
         <Box
@@ -190,13 +176,8 @@ export default function QuizBlock({
           ) : null}
 
           {mode === ModeID.game && winner.length > 0 ? (
-            <Typography
-              sx={{
-                color: "white",
-                fontSize: 14,
-              }}
-            >
-              {winner}
+            <Typography variant="h2" sx={{ color: `white`, fontSize: 14 }}>
+              {`${trackInfo?.authorName} - ${trackInfo?.trackName}`}
             </Typography>
           ) : null}
 

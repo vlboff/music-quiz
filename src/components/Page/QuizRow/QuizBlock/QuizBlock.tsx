@@ -74,15 +74,6 @@ export default function QuizBlock({
       const points = pointsArr.reduce((sum, current) => sum + current, 0);
       dispatch(addPlayersPoints({ name: allPlayers[i].name, points }));
     }
-    // const winnersOnly = Object.values(sections).map((section) =>
-    //   section.filter((block) => block.winner === winner && winner.length > 0)
-    // );
-    // const pointsArr = winnersOnly.map((section) =>
-    //   section.reduce((sum, current) => sum + current.points, 0)
-    // );
-    // const points = pointsArr.reduce((sum, current) => sum + current, 0);
-    // console.log(winnersOnly);
-    // dispatch(addPlayersPoints({ name: winner, points }));
   };
 
   const bgColor = () => {
@@ -114,7 +105,6 @@ export default function QuizBlock({
         result();
       }
     }
-    // console.log(sections);
   }, [sections]);
 
   useEffect(() => {
